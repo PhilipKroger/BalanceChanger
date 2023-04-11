@@ -1,0 +1,10 @@
+Maks 100 
+Vlad 190 
+Sina 30 
+Ivan 54 
+Nikita 160 
+Seraphim 745 
+Jane 412 
+Joe 22 
+Kevin 98 
+Alex 533 
