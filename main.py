@@ -16,11 +16,11 @@ print("Enter sender's name, recipient's name and transfer amount (Example) Max V
 user_input = input("Enter: ")
 
 
-def bank(user_input):
-    if len(user_input.split()) == 3:
-        user_1 = str(user_input.split()[0])  # sender
-        user_2 = str(user_input.split()[1])  # recipient
-        amount = int(user_input.split()[2])  # amount
+def bank(user_inp):
+    if len(user_inp.split()) == 3:
+        user_1 = str(user_inp.split()[0])  # sender
+        user_2 = str(user_inp.split()[1])  # recipient
+        amount = int(user_inp.split()[2])  # amount
 
         """Our sender and recipient are in the dictionary 'base_dict' """
         if amount <= base_dict[user_1]:
@@ -47,9 +47,9 @@ def bank(user_input):
         return "IncorrectInputError"
 
 
-def delete_user(user_input):
+def delete_user(user_inp):
     """Command: delete user. Example: delete Maks."""
-    username = str(user_input.split()[1])
+    username = str(user_inp.split()[1])
     f_1 = open('database.txt', 'w')
     for key, value in base_dict.items():
         f_1.write("{0}".format(key) + " {0} \n".format(value))
@@ -57,19 +57,31 @@ def delete_user(user_input):
     return "Operation was successfully"
 
 
-def add_user(user_input):
+def add_user(user_inp):
     """Command: add user. Example: add Maks. Default balance = 0."""
-    username = str(user_input.split()[1])
+    username = str(user_inp.split()[1])
     base_dict[username] = 0
     return "Operation was successfully"
 
 
-if str(user_input.split()[0]) == 'bank':
-    print(bank(user_input))
-elif str(user_input.split()[0]) == 'delete':
-    print(delete_user(user_input))
-elif str(user_input.split()[0]) == 'add':
-    print(add_user(user_input))
+def user_replenish(user_inp):
+    """Command: replenish the user's balance. Example: Maks 200."""
+    username = str(user_inp.split()[0])
+    base_dict[username] += int(user_inp.split()[1])
+    return "Operation was successfully"
+
+
+if len(user_input.split()) == 2:
+    if str(user_input.split()[0]) == 'bank':
+        print(bank(user_input))
+    elif str(user_input.split()[0]) == 'delete':
+        print(delete_user(user_input))
+    elif str(user_input.split()[0]) == 'add':
+        print(add_user(user_input))
+    elif str(user_input.split()[0]) == 'replenish':
+        print(user_replenish(user_input))
+    else:
+        print('Incorrect input')
 else:
     print('Incorrect input')
 
